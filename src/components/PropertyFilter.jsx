@@ -56,7 +56,7 @@ export default function PropertyFilter({ filters, onFilterChange, onReset }) {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
         {/* Selector Tipo de Inmueble */}
         <div className="space-y-1.5">
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1">
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1">
             <Building className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
             Tipo de Inmueble
           </label>
@@ -75,7 +75,7 @@ export default function PropertyFilter({ filters, onFilterChange, onReset }) {
 
         {/* Input Ubicación */}
         <div className="space-y-1.5">
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1">
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1">
             <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
             Ubicación
           </label>
@@ -100,7 +100,7 @@ export default function PropertyFilter({ filters, onFilterChange, onReset }) {
 
         {/* Rango / Precio Máximo */}
         <div className="space-y-1.5">
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1">
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1">
             <SlidersHorizontal className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
             Precio Máximo (USD)
           </label>

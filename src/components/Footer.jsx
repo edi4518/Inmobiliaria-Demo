@@ -10,7 +10,7 @@ export default function Footer() {
           
           {/* Column 1: Marca & Presentación Institucional */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-3 group inline-flex">
+            <Link to="/" className="flex items-center gap-3 group">
               <div className="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-sky-600/30">
                 <Building2 className="w-5 h-5" />
               </div>
