@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Bed, Bath, Maximize, MapPin, ArrowRight } from 'lucide-react';
 
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
+
 export default function PropertyCard({ property }) {
   const { id, title, priceFormatted, location, operation, type, bedrooms, bathrooms, area, image } = property;
+
+  const handleImageError = (e) => {
+    e.target.src = FALLBACK_IMAGE;
+  };
 
   const isVenta = operation === 'Venta';
 
@@ -13,6 +19,7 @@ export default function PropertyCard({ property }) {
         <img 
           src={image} 
           alt={title}
+          onError={handleImageError}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
@@ -59,21 +66,23 @@ export default function PropertyCard({ property }) {
           </div>
         </div>
 
-        {/* Price & CTA Button */}
+        {/* Price & Action */}
         <div className="flex items-center justify-between pt-1">
-          <div className="flex flex-col">
-            <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Valor</span>
-            <span className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <div>
+            <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">
+              Precio
+            </span>
+            <span className="text-lg font-black text-sky-600 dark:text-sky-400">
               {priceFormatted}
             </span>
           </div>
 
           <Link
             to={`/propiedad/${id}`}
-            className="inline-flex items-center gap-1.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs px-4 py-2.5 rounded-xl shadow-md transition-all duration-200"
+            className="inline-flex items-center gap-1 text-xs font-semibold bg-sky-50 dark:bg-slate-800 text-sky-600 dark:text-sky-400 hover:bg-sky-600 hover:text-white dark:hover:bg-sky-600 dark:hover:text-white px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
           >
             <span>Ver Detalle</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
