@@ -1,15 +1,31 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PropertyCard from '../components/PropertyCard';
 import { propertiesData } from '../data/properties';
 import { Search, Filter, RefreshCw, Frown, SlidersHorizontal } from 'lucide-react';
 
 export default function Propiedades() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [operation, setOperation] = useState('Todos');
-  const [type, setType] = useState('Todos');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('ubicacion') || '');
+  const [operation, setOperation] = useState(searchParams.get('operacion') || 'Todos');
+  const [type, setType] = useState(searchParams.get('tipo') || 'Todos');
+  const [maxPrice, setMaxPrice] = useState(searchParams.get('precioMax') || '');
   const [minBedrooms, setMinBedrooms] = useState('0');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+  // Sync state with URL search parameters on navigation / load
+  useEffect(() => {
+    const opUrl = searchParams.get('operacion');
+    const tpUrl = searchParams.get('tipo');
+    const ubUrl = searchParams.get('ubicacion');
+    const pmUrl = searchParams.get('precioMax');
+
+    if (opUrl) setOperation(opUrl);
+    if (tpUrl) setType(tpUrl);
+    if (ubUrl) setSearchTerm(ubUrl);
+    if (pmUrl) setMaxPrice(pmUrl);
+  }, [searchParams]);
 
   const handleResetFilters = () => {
     setSearchTerm('');
@@ -17,22 +33,45 @@ export default function Propiedades() {
     setType('Todos');
     setMaxPrice('');
     setMinBedrooms('0');
+    setSearchParams({});
   };
 
   const hasActiveFilters = searchTerm !== '' || operation !== 'Todos' || type !== 'Todos' || maxPrice !== '' || minBedrooms !== '0';
 
   const filteredProperties = useMemo(() => {
     return propertiesData.filter((property) => {
+      // Search term (title or location)
       if (searchTerm.trim() !== '') {
         const query = searchTerm.toLowerCase();
         const matchesTitle = property.title.toLowerCase().includes(query);
         const matchesLocation = property.location.toLowerCase().includes(query);
         if (!matchesTitle && !matchesLocation) return false;
       }
-      if (operation !== 'Todos' && property.operation !== operation) return false;
-      if (type !== 'Todos' && property.type !== type) return false;
-      if (maxPrice !== '' && property.price > Number(maxPrice)) return false;
-      if (minBedrooms !== '0' && property.bedrooms < Number(minBedrooms)) return false;
+
+      // Operation (Venta / Alquiler / Todos)
+      if (operation !== 'Todos' && operation !== 'todas') {
+        if (property.operation.toLowerCase() !== operation.toLowerCase()) {
+          return false;
+        }
+      }
+
+      // Property Type (Departamento / Casa / PH / Oficina / Todos)
+      if (type !== 'Todos' && type !== 'todos') {
+        if (property.type.toLowerCase() !== type.toLowerCase()) {
+          return false;
+        }
+      }
+
+      // Max price
+      if (maxPrice !== '' && property.price > Number(maxPrice)) {
+        return false;
+      }
+
+      // Min bedrooms
+      if (minBedrooms !== '0' && property.bedrooms < Number(minBedrooms)) {
+        return false;
+      }
+
       return true;
     });
   }, [searchTerm, operation, type, maxPrice, minBedrooms]);
@@ -42,24 +81,24 @@ export default function Propiedades() {
       {/* Header & Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/80 dark:border-slate-800 pb-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">Bienes Raíces</span>
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+          <span className="text-sky-700 dark:text-sky-400 font-bold uppercase tracking-wider text-sm mb-1 block">BIENES RAÍCES</span>
+          <h1 className="text-slate-900 dark:text-white font-extrabold text-3xl md:text-4xl">
             Catálogo Completo de Propiedades
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
+          <p className="text-slate-600 dark:text-slate-300 text-base mt-1">
             Encontrá el inmueble ideal según tus preferencias de presupuesto y ubicación.
           </p>
         </div>
 
-        {/* Dynamic Results Counter */}
+        {/* Dynamic Results Counter Badge */}
         <div className="flex items-center gap-3">
-          <div className="bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 font-semibold px-4 py-2.5 rounded-2xl border border-sky-100 dark:border-sky-900/60 text-sm shadow-sm">
-            Mostrando <span className="font-extrabold text-sky-900 dark:text-sky-100">{filteredProperties.length}</span> {filteredProperties.length === 1 ? 'propiedad encontrada' : 'propiedades encontradas'}
+          <div className="bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800 font-semibold px-4 py-2 rounded-full text-sm shadow-sm">
+            Mostrando <span className="font-extrabold">{filteredProperties.length}</span> {filteredProperties.length === 1 ? 'propiedad encontrada' : 'propiedades encontradas'}
           </div>
 
           <button
             onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
-            className="lg:hidden inline-flex items-center gap-2 bg-slate-900 dark:bg-sky-600 text-white px-4 py-2.5 rounded-2xl text-sm font-medium shadow-md"
+            className="lg:hidden inline-flex items-center gap-2 bg-slate-900 dark:bg-sky-600 text-white px-4 py-2.5 rounded-2xl text-sm font-medium shadow-md cursor-pointer"
           >
             <SlidersHorizontal className="w-4 h-4" />
             <span>Filtros</span>
@@ -84,7 +123,7 @@ export default function Propiedades() {
             {hasActiveFilters && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 font-semibold flex items-center gap-1 transition-colors"
+                className="text-xs text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 font-semibold flex items-center gap-1 transition-colors cursor-pointer"
                 title="Limpiar todos los filtros"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
@@ -121,8 +160,8 @@ export default function Propiedades() {
                   key={op}
                   type="button"
                   onClick={() => setOperation(op)}
-                  className={`py-2 text-xs font-semibold rounded-lg transition-all ${
-                    operation === op
+                  className={`py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+                    operation.toLowerCase() === op.toLowerCase()
                       ? 'bg-sky-600 text-white shadow-sm'
                       : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                   }`}
@@ -185,7 +224,7 @@ export default function Propiedades() {
                   key={item.val}
                   type="button"
                   onClick={() => setMinBedrooms(item.val)}
-                  className={`py-2 text-xs font-semibold rounded-xl border transition-all ${
+                  className={`py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
                     minBedrooms === item.val
                       ? 'bg-sky-600 text-white border-sky-600 shadow-sm'
                       : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
@@ -201,7 +240,7 @@ export default function Propiedades() {
           {hasActiveFilters && (
             <button
               onClick={handleResetFilters}
-              className="w-full inline-flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold py-2.5 rounded-xl text-xs transition-colors pt-3 border border-slate-200 dark:border-slate-700"
+              className="w-full inline-flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold py-2.5 rounded-xl text-xs transition-colors border border-slate-200 dark:border-slate-700 cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Restablecer Filtros</span>
@@ -228,7 +267,7 @@ export default function Propiedades() {
               </p>
               <button
                 onClick={handleResetFilters}
-                className="inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-medium text-sm px-6 py-3 rounded-xl transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-medium text-sm px-6 py-3 rounded-xl transition-all shadow-md cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>Limpiar Filtros y Mostrar Todo</span>

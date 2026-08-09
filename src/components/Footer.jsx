@@ -104,7 +104,6 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* Botón directo a WhatsApp */}
             <div className="pt-2">
               <a
                 href="https://wa.me/5491112345678"

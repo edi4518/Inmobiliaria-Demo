@@ -1,12 +1,9 @@
-import { useState } from 'react';
-import { 
-  MapPin, Phone, Mail, Clock, MessageCircle, Send, CheckCircle2, 
-  Calculator, HelpCircle, ExternalLink, ShieldCheck 
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck, Send, Calculator, HelpCircle, CheckCircle2 } from 'lucide-react';
 
-export default function Contacto() {
+export const Contacto = () => {
+  const [submitted, setSubmitted] = useState(false);
   const [requestType, setRequestType] = useState('tasacion');
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -23,13 +20,8 @@ export default function Contacto() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-  };
-
   const handleResetForm = () => {
-    setIsSubmitted(false);
+    setSubmitted(false);
     setFormData({
       nombre: '',
       email: '',
@@ -46,137 +38,107 @@ export default function Contacto() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-900 uppercase tracking-wider inline-flex items-center gap-1.5">
-          <Calculator className="w-4 h-4" /> Atención al Cliente & Tasaciones
+      <div className="text-center max-w-3xl mx-auto">
+        <span className="bg-sky-100 dark:bg-slate-800 text-sky-800 dark:text-sky-300 border border-sky-300 dark:border-slate-700 font-semibold px-4 py-1.5 rounded-full inline-flex items-center gap-2 text-sm mx-auto mb-3">
+          <Calculator className="w-4 h-4 text-sky-700 dark:text-sky-400" />
+          <span>Atención al Cliente & Tasaciones</span>
         </span>
-        <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h1 className="text-slate-900 dark:text-white font-extrabold text-3xl md:text-4xl text-center">
           Ponete en contacto con nuestro equipo
         </h1>
-        <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
+        <p className="text-slate-600 dark:text-slate-300 text-center text-base max-w-xl mx-auto mt-2">
           Solicitá la tasación profesional de tu inmueble o hacenos cualquier consulta. Estamos para asesorarte.
         </p>
       </div>
 
-      {/* Grid de Contenido Principal */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        
-        {/* 1. INFORMACIÓN DE CONTACTO */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Columna Izquierda: Tarjetas Oscuras #0f172a */}
         <div className="space-y-6">
-          <div className="bg-slate-900 dark:bg-slate-950 text-white p-8 rounded-3xl space-y-8 shadow-xl border border-slate-800 dark:border-slate-800">
-            <h3 className="text-xl font-bold border-b border-slate-800 pb-4 text-white">
-              HogarUrban Real Estate
-            </h3>
-
-            <ul className="space-y-6 text-slate-300 text-sm">
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
-                </div>
+          <div className="bg-[#0f172a] text-white p-6 rounded-2xl shadow-xl border border-slate-800 space-y-6">
+            <h2 className="text-xl font-bold text-white border-b border-slate-800 pb-3">HogarUrban Real Estate</h2>
+            <div className="space-y-4 text-sm text-slate-300">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-white font-semibold mb-0.5">Oficinas Centrales</strong>
-                  <span className="text-slate-300 text-xs">Av. Libertador 4580, Piso 8, CABA</span>
+                  <strong className="block text-white">Oficinas Centrales</strong>
+                  <span>Av. Libertador 4580, Piso 8, CABA</span>
                 </div>
-              </li>
-
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5" />
-                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-white font-semibold mb-0.5">Teléfonos de Atención</strong>
-                  <span className="text-slate-300 text-xs">+54 (11) 4567-8900 / +54 (11) 4567-8901</span>
+                  <strong className="block text-white">Teléfonos de Atención</strong>
+                  <span>+54 (11) 4567-8900</span>
                 </div>
-              </li>
-
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5" />
-                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-white font-semibold mb-0.5">Correo Electrónico</strong>
-                  <a href="mailto:contacto@hogarurban.com" className="text-sky-400 hover:underline text-xs">
-                    contacto@hogarurban.com
-                  </a>
+                  <strong className="block text-white">Correo Electrónico</strong>
+                  <span>contacto@hogarurban.com</span>
                 </div>
-              </li>
-
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5" />
-                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Clock className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-white font-semibold mb-0.5">Horarios de Atención</strong>
-                  <span className="text-slate-300 text-xs block">Lun a Vie: 9:00 a 19:00 hs</span>
-                  <span className="text-slate-300 text-xs block">Sábados: 10:00 a 14:00 hs</span>
+                  <strong className="block text-white">Horarios de Atención</strong>
+                  <span className="block">Lun a Vie: 9:00 a 19:00 hs</span>
+                  <span className="block">Sábados: 10:00 a 14:00 hs</span>
                 </div>
-              </li>
-            </ul>
-
-            <div className="pt-2 space-y-3">
-              <a 
-                href="https://maps.google.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center justify-between text-xs text-slate-300 bg-slate-800 hover:bg-slate-700/80 p-3.5 rounded-xl border border-slate-700 transition-colors"
-              >
-                <span className="font-semibold">Ver ubicación en Google Maps</span>
-                <ExternalLink className="w-4 h-4 text-sky-400" />
-              </a>
+              </div>
             </div>
           </div>
 
-          <div className="bg-sky-50 dark:bg-sky-950/40 border border-sky-100 dark:border-sky-900 p-5 rounded-3xl flex items-center gap-3 text-sky-900 dark:text-sky-200">
-            <ShieldCheck className="w-8 h-8 text-sky-600 dark:text-sky-400 shrink-0" />
-            <div className="text-xs">
-              <span className="font-bold block text-sky-950 dark:text-sky-100">Martilleros Matriculados</span>
-              <span>CUCICBA N° 7842 / N° 6540. Respaldo y ética legal garantizados.</span>
+          {/* Caja Martilleros Matriculados #0f172a */}
+          <div className="bg-[#0f172a] text-white p-6 rounded-2xl shadow-xl border border-slate-800 flex items-start gap-4">
+            <ShieldCheck className="w-7 h-7 text-sky-400 shrink-0 mt-1" />
+            <div>
+              <h3 className="text-white font-bold text-base">Martilleros Matriculados</h3>
+              <p className="text-slate-300 text-xs mt-1">CUCICBA N° 7842 / N° 6540. Respaldo y ética legal garantizados.</p>
             </div>
           </div>
         </div>
 
-        {/* 2. FORMULARIO DE CONSULTA / TASACIÓN */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-6 sm:p-10 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm space-y-6 transition-colors">
-          
-          <div className="flex flex-col sm:flex-row gap-2 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl">
+        {/* Columna Derecha: Formulario (bg-[#0f172a] text-white p-8 rounded-2xl shadow-xl border border-slate-800) */}
+        <div className="lg:col-span-2 bg-[#0f172a] text-white p-8 rounded-2xl shadow-xl border border-slate-800 space-y-6">
+          <div className="flex flex-col sm:flex-row gap-2 bg-slate-900 p-1.5 rounded-2xl border border-slate-700">
             <button
               type="button"
               onClick={() => setRequestType('tasacion')}
-              className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 ${
+              className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 requestType === 'tasacion'
                   ? 'bg-sky-600 text-white shadow-md'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
-              <Calculator className="w-4 h-4" />
+              <Calculator className="w-4 h-4 text-sky-400" />
               <span>Solicitar Tasación de mi Propiedad</span>
             </button>
 
             <button
               type="button"
               onClick={() => setRequestType('general')}
-              className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 ${
+              className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 requestType === 'general'
                   ? 'bg-sky-600 text-white shadow-md'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
-              <HelpCircle className="w-4 h-4" />
+              <HelpCircle className="w-4 h-4 text-sky-400" />
               <span>Consulta General</span>
             </button>
           </div>
 
-          {isSubmitted ? (
+          {submitted ? (
             <div className="text-center py-12 space-y-4">
-              <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 bg-emerald-950/60 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-700">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+              <h3 className="text-2xl font-bold text-white">
                 {isTasacion ? '¡Solicitud de Tasación Recibida!' : '¡Consulta Enviada con Éxito!'}
               </h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md mx-auto leading-relaxed">
+              <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
                 {isTasacion 
                   ? 'Un corredor especialista en la zona evaluará los datos de tu inmueble y te contactará a la brevedad para fijar una inspección presencial o virtual.' 
                   : 'Gracias por comunicarte con HogarUrban. Te responderemos a la brevedad.'
@@ -184,22 +146,22 @@ export default function Contacto() {
               </p>
               <button
                 onClick={handleResetForm}
-                className="mt-4 bg-sky-600 text-white font-semibold text-sm px-6 py-2.5 rounded-xl hover:bg-sky-700 transition-colors shadow-sm"
+                className="mt-4 bg-sky-600 text-white font-semibold text-sm px-6 py-2.5 rounded-xl hover:bg-sky-700 transition-colors shadow-sm cursor-pointer"
               >
                 Enviar otra consulta
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-6">
               
               <div className="space-y-4">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-100 dark:border-slate-800 pb-2">
-                  1. Datos Personales de Contacto
+                <h4 className="text-sky-400 font-bold text-xs uppercase tracking-wider border-b border-slate-800 pb-2">
+                  1. DATOS PERSONALES DE CONTACTO
                 </h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                    <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                       Nombre y Apellido *
                     </label>
                     <input
@@ -208,12 +170,12 @@ export default function Contacto() {
                       placeholder="Ej. Martín Pérez"
                       value={formData.nombre}
                       onChange={(e) => handleChange('nombre', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                    <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                       Correo Electrónico *
                     </label>
                     <input
@@ -222,13 +184,13 @@ export default function Contacto() {
                       placeholder="ejemplo@correo.com"
                       value={formData.email}
                       onChange={(e) => handleChange('email', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                     Teléfono / WhatsApp *
                   </label>
                   <input
@@ -237,26 +199,26 @@ export default function Contacto() {
                     placeholder="+54 9 11 1234-5678"
                     value={formData.telefono}
                     onChange={(e) => handleChange('telefono', e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                   />
                 </div>
               </div>
 
               {isTasacion && (
                 <div className="space-y-4 pt-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 border-b border-sky-100 dark:border-sky-900/60 pb-2">
-                    2. Detalles del Inmueble a Tasar
+                  <h4 className="text-sky-400 font-bold text-xs uppercase tracking-wider border-b border-slate-800 pb-2">
+                    2. DETALLES DEL INMUEBLE A TASAR
                   </h4>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                      <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                         Tipo de Inmueble
                       </label>
                       <select
                         value={formData.tipoInmueble}
                         onChange={(e) => handleChange('tipoInmueble', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                       >
                         <option value="Departamento">Departamento</option>
                         <option value="Casa">Casa</option>
@@ -267,13 +229,13 @@ export default function Contacto() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                      <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                         Operación Deseada
                       </label>
                       <select
                         value={formData.tipoOperacion}
                         onChange={(e) => handleChange('tipoOperacion', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                       >
                         <option value="Venta">Venta</option>
                         <option value="Alquiler">Alquiler</option>
@@ -283,7 +245,7 @@ export default function Contacto() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                      <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                         Ubicación / Barrio
                       </label>
                       <input
@@ -291,18 +253,18 @@ export default function Contacto() {
                         placeholder="Ej. Belgrano, Palermo, Olivos..."
                         value={formData.barrio}
                         onChange={(e) => handleChange('barrio', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                      <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                         Cantidad de Ambientes
                       </label>
                       <select
                         value={formData.ambientes}
                         onChange={(e) => handleChange('ambientes', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                       >
                         <option value="1">1 Ambiente</option>
                         <option value="2">2 Ambientes</option>
@@ -316,7 +278,7 @@ export default function Contacto() {
               )}
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                <label className="block text-slate-200 font-semibold text-xs mb-1.5">
                   {isTasacion ? 'Detalles o Estado del Inmueble' : 'Mensaje o Consulta'}
                 </label>
                 <textarea
@@ -328,48 +290,23 @@ export default function Contacto() {
                   }
                   value={formData.mensaje}
                   onChange={(e) => handleChange('mensaje', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 text-sm font-medium transition-all"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-sky-600/20 transition-all text-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-sky-600/20 transition-all text-sm cursor-pointer"
               >
                 <Send className="w-4 h-4" />
                 <span>{isTasacion ? 'Solicitar Tasación Profesional' : 'Enviar Consulta'}</span>
               </button>
             </form>
           )}
-
         </div>
       </div>
-
-      {/* 3. BOTÓN FLOTANTE / ACCESO RÁPIDO A WHATSAPP */}
-      <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 border border-emerald-500/20">
-        <div className="space-y-2 text-center sm:text-left">
-          <span className="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-            Contacto Inmediato
-          </span>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-            ¿Preferís asesoramiento instantáneo?
-          </h3>
-          <p className="text-emerald-100 text-sm max-w-xl">
-            Hablá directamente con un corredor de guardia por WhatsApp sin demoras.
-          </p>
-        </div>
-
-        <a
-          href="https://wa.me/5491112345678?text=Hola%20HogarUrban,%20quisiera%20hacer%20una%20consulta%20directa."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-emerald-900 font-extrabold text-base px-8 py-4 rounded-2xl shadow-lg transition-all shrink-0 hover:scale-105"
-        >
-          <MessageCircle className="w-6 h-6 text-emerald-600 fill-current" />
-          <span>Iniciar Chat WhatsApp</span>
-        </a>
-      </section>
-
     </div>
   );
-}
+};
+
+export default Contacto;

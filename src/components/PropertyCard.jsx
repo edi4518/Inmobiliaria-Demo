@@ -38,7 +38,7 @@ export default function PropertyCard({ property }) {
             <span className="truncate">{location}</span>
           </div>
 
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2 leading-snug">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2 leading-snug">
             {title}
           </h3>
         </div>
@@ -70,7 +70,7 @@ export default function PropertyCard({ property }) {
 
           <Link
             to={`/propiedad/${id}`}
-            className="inline-flex items-center gap-1.5 bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-600 dark:hover:bg-sky-600 text-sky-600 dark:text-sky-400 hover:text-white dark:hover:text-white font-semibold text-xs px-3.5 py-2.5 rounded-xl transition-all duration-200 shadow-sm"
+            className="inline-flex items-center gap-1.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs px-4 py-2.5 rounded-xl shadow-md transition-all duration-200"
           >
             <span>Ver Detalle</span>
             <ArrowRight className="w-4 h-4" />

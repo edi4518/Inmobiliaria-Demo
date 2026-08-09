@@ -1,13 +1,24 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Building2, Menu, X, Calculator, Sun, Moon } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Building2, Sun, Moon, Menu, X, Calculator } from 'lucide-react';
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const { darkMode, toggleTheme } = useTheme();
+export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
   const closeMenu = () => setIsOpen(false);
 
   const navLinks = [
@@ -18,109 +29,92 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
-          {/* Logo */}
-          <Link 
-            to="/" 
-            onClick={closeMenu}
-            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-lg p-1"
+    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-slate-200 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        {/* Logo */}
+        <Link 
+          to="/" 
+          onClick={closeMenu}
+          className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-lg p-1"
+        >
+          <div className="w-11 h-11 bg-sky-600 group-hover:bg-sky-700 transition-colors rounded-xl flex items-center justify-center text-white shadow-md shadow-sky-600/20">
+            <Building2 className="w-6 h-6" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-xl tracking-tight text-slate-900 leading-tight group-hover:text-sky-600 transition-colors">
+              HogarUrban
+            </span>
+            <span className="text-xs uppercase tracking-widest text-slate-500 font-semibold">
+              Real Estate
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8 font-medium">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                  isActive
+                    ? 'text-sky-600 bg-sky-50 font-semibold'
+                    : 'text-slate-600 hover:text-sky-600 hover:bg-slate-50'
+                }`
+              }
+            >
+              {link.name}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Theme Toggle & Action Button */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsDark(!isDark)}
+            type="button"
+            className="p-2.5 rounded-full border border-slate-300 hover:bg-slate-200 transition-all cursor-pointer"
+            title="Cambiar Modo Claro/Oscuro"
+            aria-label="Cambiar tema"
           >
-            <div className="w-11 h-11 bg-sky-600 group-hover:bg-sky-700 transition-colors rounded-xl flex items-center justify-center text-white shadow-md shadow-sky-600/20">
-              <Building2 className="w-6 h-6" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white leading-tight group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
-                HogarUrban
-              </span>
-              <span className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">
-                Real Estate
-              </span>
-            </div>
+            {isDark ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
+          </button>
+
+          <Link 
+            to="/contacto" 
+            className="hidden sm:inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-sky-500/20"
+          >
+            <Calculator className="w-4 h-4" />
+            <span>Tasar Propiedad</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? 'text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 font-semibold'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-50 dark:hover:bg-slate-800/60'
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
-          </nav>
-
-          {/* Theme Toggle & Action Button */}
-          <div className="hidden md:flex items-center gap-3">
-            {/* Global Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              type="button"
-              aria-label="Cambiar tema"
-              className="p-2.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-amber-400 hover:scale-105 transition-transform cursor-pointer"
-            >
-              {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
-            </button>
-
-            {/* Action Button */}
-            <Link
-              to="/contacto"
-              className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-md shadow-sky-600/20 hover:shadow-sky-600/30 transition-all duration-200 active:scale-[0.98]"
-            >
-              <Calculator className="w-4 h-4" />
-              <span>Tasar Propiedad</span>
-            </Link>
-          </div>
-
-          {/* Mobile Actions & Hamburger Button */}
-          <div className="flex md:hidden items-center gap-2">
-            {/* Mobile Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              type="button"
-              aria-label="Cambiar tema"
-              className="p-2.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-amber-400 hover:scale-105 transition-transform"
-            >
-              {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
-            </button>
-
-            <button
-              onClick={toggleMenu}
-              type="button"
-              className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500"
-              aria-label="Abrir menú de navegación"
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+            className="md:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100"
+            aria-label="Abrir menú"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3 shadow-lg">
-          <div className="flex flex-col space-y-1">
+        <div className="md:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-3 shadow-lg">
+          <div className="flex flex-col space-y-2 font-medium">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  `px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                  `px-4 py-2.5 rounded-xl text-base transition-colors ${
                     isActive
-                      ? 'text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 font-semibold'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800'
+                      ? 'text-sky-600 bg-sky-50 font-semibold'
+                      : 'text-slate-600 hover:bg-slate-50'
                   }`
                 }
               >
@@ -128,11 +122,11 @@ export default function Navbar() {
               </NavLink>
             ))}
           </div>
-          <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+          <div className="pt-2 border-t border-slate-200">
             <Link
               to="/contacto"
               onClick={closeMenu}
-              className="flex items-center justify-center gap-2 w-full bg-sky-600 hover:bg-sky-700 text-white font-medium py-3 rounded-xl shadow-md shadow-sky-600/20 transition-all"
+              className="flex items-center justify-center gap-2 w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 rounded-xl shadow-md"
             >
               <Calculator className="w-5 h-5" />
               <span>Tasar Propiedad</span>
@@ -142,4 +136,6 @@ export default function Navbar() {
       )}
     </header>
   );
-}
+};
+
+export default Navbar;

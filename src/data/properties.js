@@ -208,3 +208,6 @@ export const propertiesData = [
     description: 'Pintoresco PH histórico en casco antiguo de San Telmo. Posee techos de bovedilla vista de 4.20m de altura, entrepiso de pino oregón con dormitorio, baño completo y terraza privada de 17m² ideales para disfrutar atardeceres.'
   }
 ];
+
+export const properties = propertiesData;
+
