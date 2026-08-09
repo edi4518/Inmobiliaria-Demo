@@ -1,11 +1,28 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Building2, Menu, X, Calculator, Sun, Moon } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { darkMode, toggleTheme } = useTheme();
+
+  // Direct native dark mode state & effect
+  const [isDark, setIsDark] = useState(() => {
+    return document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark';
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
+  const handleToggleTheme = () => {
+    setIsDark(prev => !prev);
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -62,25 +79,14 @@ export default function Navbar() {
 
           {/* Theme Toggle & Action Button */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Dark Mode Toggle Button */}
+            {/* Direct Native Dark Mode Toggle Button */}
             <button
-              onClick={toggleTheme}
+              onClick={handleToggleTheme}
               type="button"
-              className="inline-flex items-center gap-2 p-2.5 sm:px-3.5 sm:py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-medium text-xs transition-all duration-200 shadow-inner hover:opacity-80"
-              aria-label="Toggle Theme"
-              title={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              aria-label="Cambiar tema"
+              className="p-2.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-amber-400 hover:scale-105 transition-transform"
             >
-              {darkMode ? (
-                <>
-                  <Sun className="w-4 h-4 text-amber-400" />
-                  <span className="hidden lg:inline text-amber-300 font-semibold">Modo Claro</span>
-                </>
-              ) : (
-                <>
-                  <Moon className="w-4 h-4 text-sky-600" />
-                  <span className="hidden lg:inline text-slate-600 font-semibold">Modo Oscuro</span>
-                </>
-              )}
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5 text-indigo-600" />}
             </button>
 
             {/* Action Button */}
@@ -97,12 +103,12 @@ export default function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             {/* Mobile Theme Toggle Button */}
             <button
-              onClick={toggleTheme}
+              onClick={handleToggleTheme}
               type="button"
-              className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors hover:opacity-80"
-              aria-label="Toggle Theme"
+              aria-label="Cambiar tema"
+              className="p-2.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-amber-400 hover:scale-105 transition-transform"
             >
-              {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-sky-600" />}
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5 text-indigo-600" />}
             </button>
 
             <button
