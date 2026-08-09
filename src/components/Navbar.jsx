@@ -5,7 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isDark, toggleTheme } = useTheme();
+  const { darkMode, toggleTheme } = useTheme();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -62,17 +62,17 @@ export default function Navbar() {
 
           {/* Theme Toggle & Action Button */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Dark Mode Pill Button */}
+            {/* Dark Mode Toggle Button */}
             <button
               onClick={toggleTheme}
               type="button"
-              className="inline-flex items-center gap-2 p-2.5 sm:px-3.5 sm:py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-medium text-xs transition-all duration-200 shadow-inner"
-              aria-label="Cambiar tema"
-              title={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              className="inline-flex items-center gap-2 p-2.5 sm:px-3.5 sm:py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-medium text-xs transition-all duration-200 shadow-inner hover:opacity-80"
+              aria-label="Toggle Theme"
+              title={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             >
-              {isDark ? (
+              {darkMode ? (
                 <>
-                  <Sun className="w-4 h-4 text-amber-400 animate-spin-slow" />
+                  <Sun className="w-4 h-4 text-amber-400" />
                   <span className="hidden lg:inline text-amber-300 font-semibold">Modo Claro</span>
                 </>
               ) : (
@@ -99,10 +99,10 @@ export default function Navbar() {
             <button
               onClick={toggleTheme}
               type="button"
-              className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              aria-label="Cambiar tema"
+              className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors hover:opacity-80"
+              aria-label="Toggle Theme"
             >
-              {isDark ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-sky-600" />}
+              {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-sky-600" />}
             </button>
 
             <button
