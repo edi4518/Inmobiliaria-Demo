@@ -2,29 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Estilos para Modo Claro */
-body {
-  background-color: #f8fafc;
-  color: #0f172a;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+@layer base {
+  html {
+    color-scheme: light dark;
+  }
+  
+  html.dark {
+    color-scheme: dark;
+  }
 
-/* Overrides directos para Modo Oscuro */
-html.dark body {
-  background-color: #020617 !important;
-  color: #f8fafc !important;
-}
-
-html.dark header,
-html.dark nav,
-html.dark .bg-white,
-html.dark .bg-slate-100 {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  border-color: #1e293b !important;
-}
-
-html.dark text-slate-900,
-html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark p {
-  color: #f8fafc !important;
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased font-sans transition-colors duration-300;
+  }
 }
