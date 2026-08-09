@@ -3,7 +3,7 @@ import { Building2, MapPin, Mail, MessageCircle, ChevronRight, ShieldCheck } fro
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-300 border-t border-slate-800">
+    <footer className="bg-slate-900 dark:bg-slate-950 text-slate-300 border-t border-slate-800 dark:border-slate-900 transition-colors">
       {/* Main Footer Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
@@ -26,7 +26,7 @@ export default function Footer() {
             <p className="text-slate-400 text-sm leading-relaxed">
               Somos líderes en el sector inmobiliario urbano. Brindamos asesoramiento integral y personalizado para la compra, venta, alquiler y valuación de propiedades residenciales y comerciales.
             </p>
-            <div className="pt-2 flex items-center gap-2 text-xs text-slate-400 bg-slate-800/60 p-3 rounded-lg border border-slate-800">
+            <div className="pt-2 flex items-center gap-2 text-xs text-slate-400 bg-slate-800/60 dark:bg-slate-900/60 p-3 rounded-lg border border-slate-800 dark:border-slate-800/80">
               <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
               <span>Matrícula CUCICBA N° 7842 - Excelencia e Integridad Garantes.</span>
             </div>
@@ -122,7 +122,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-slate-800/80 bg-slate-950/60 py-6">
+      <div className="border-t border-slate-800/80 bg-slate-950/80 dark:bg-black/60 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>© {new Date().getFullYear()} HogarUrban Real Estate. Todos los derechos reservados.</p>
           <div className="flex gap-6">

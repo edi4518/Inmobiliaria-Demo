@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { 
   MapPin, Phone, Mail, Clock, MessageCircle, Send, CheckCircle2, 
-  Calculator, Building2, HelpCircle, ExternalLink, ShieldCheck 
+  Calculator, HelpCircle, ExternalLink, ShieldCheck 
 } from 'lucide-react';
 
 export default function Contacto() {
-  const [requestType, setRequestType] = useState('tasacion'); // 'general' | 'tasacion'
+  const [requestType, setRequestType] = useState('tasacion');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     telefono: '',
-    // Campos condicionales de tasación
     tipoInmueble: 'Departamento',
     tipoOperacion: 'Venta',
     barrio: '',
@@ -50,13 +49,13 @@ export default function Contacto() {
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-sky-100 text-sky-700 uppercase tracking-wider inline-flex items-center gap-1.5">
+        <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-900 uppercase tracking-wider inline-flex items-center gap-1.5">
           <Calculator className="w-4 h-4" /> Atención al Cliente & Tasaciones
         </span>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Ponete en contacto con nuestro equipo
         </h1>
-        <p className="text-slate-600 text-base sm:text-lg">
+        <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
           Solicitá la tasación profesional de tu inmueble o hacenos cualquier consulta. Estamos para asesorarte.
         </p>
       </div>
@@ -64,9 +63,9 @@ export default function Contacto() {
       {/* Grid de Contenido Principal */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         
-        {/* 1. INFORMACIÓN DE CONTACTO & DATOS ÚTILES */}
+        {/* 1. INFORMACIÓN DE CONTACTO */}
         <div className="space-y-6">
-          <div className="bg-slate-900 text-white p-8 rounded-3xl space-y-8 shadow-xl border border-slate-800">
+          <div className="bg-slate-900 dark:bg-slate-950 text-white p-8 rounded-3xl space-y-8 shadow-xl border border-slate-800 dark:border-slate-800">
             <h3 className="text-xl font-bold border-b border-slate-800 pb-4 text-white">
               HogarUrban Real Estate
             </h3>
@@ -87,7 +86,7 @@ export default function Contacto() {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <strong className="block text-white font-semibold mb-0.5">Teléfonos de Atencion</strong>
+                  <strong className="block text-white font-semibold mb-0.5">Teléfonos de Atención</strong>
                   <span className="text-slate-300 text-xs">+54 (11) 4567-8900 / +54 (11) 4567-8901</span>
                 </div>
               </li>
@@ -116,7 +115,6 @@ export default function Contacto() {
               </li>
             </ul>
 
-            {/* Links a Google Maps & WhatsApp */}
             <div className="pt-2 space-y-3">
               <a 
                 href="https://maps.google.com" 
@@ -130,28 +128,26 @@ export default function Contacto() {
             </div>
           </div>
 
-          {/* Tarjeta de Garantía CUCICBA */}
-          <div className="bg-sky-50 border border-sky-100 p-5 rounded-3xl flex items-center gap-3 text-sky-900">
-            <ShieldCheck className="w-8 h-8 text-sky-600 shrink-0" />
+          <div className="bg-sky-50 dark:bg-sky-950/40 border border-sky-100 dark:border-sky-900 p-5 rounded-3xl flex items-center gap-3 text-sky-900 dark:text-sky-200">
+            <ShieldCheck className="w-8 h-8 text-sky-600 dark:text-sky-400 shrink-0" />
             <div className="text-xs">
-              <span className="font-bold block text-sky-950">Martilleros Matriculados</span>
+              <span className="font-bold block text-sky-950 dark:text-sky-100">Martilleros Matriculados</span>
               <span>CUCICBA N° 7842 / N° 6540. Respaldo y ética legal garantizados.</span>
             </div>
           </div>
         </div>
 
         {/* 2. FORMULARIO DE CONSULTA / TASACIÓN */}
-        <div className="lg:col-span-2 bg-white p-6 sm:p-10 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-6 sm:p-10 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm space-y-6 transition-colors">
           
-          {/* Selector de Tipo de Solicitud (Consulta vs Tasación) */}
-          <div className="flex flex-col sm:flex-row gap-2 bg-slate-100 p-1.5 rounded-2xl">
+          <div className="flex flex-col sm:flex-row gap-2 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl">
             <button
               type="button"
               onClick={() => setRequestType('tasacion')}
               className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 ${
                 requestType === 'tasacion'
                   ? 'bg-sky-600 text-white shadow-md'
-                  : 'text-slate-600 hover:text-slate-900'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <Calculator className="w-4 h-4" />
@@ -164,7 +160,7 @@ export default function Contacto() {
               className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 ${
                 requestType === 'general'
                   ? 'bg-sky-600 text-white shadow-md'
-                  : 'text-slate-600 hover:text-slate-900'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <HelpCircle className="w-4 h-4" />
@@ -172,16 +168,15 @@ export default function Contacto() {
             </button>
           </div>
 
-          {/* Estado Enviado exitosamente */}
           {isSubmitted ? (
             <div className="text-center py-12 space-y-4">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {isTasacion ? '¡Solicitud de Tasación Recibida!' : '¡Consulta Enviada con Éxito!'}
               </h3>
-              <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md mx-auto leading-relaxed">
                 {isTasacion 
                   ? 'Un corredor especialista en la zona evaluará los datos de tu inmueble y te contactará a la brevedad para fijar una inspección presencial o virtual.' 
                   : 'Gracias por comunicarte con HogarUrban. Te responderemos a la brevedad.'
@@ -197,15 +192,14 @@ export default function Contacto() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               
-              {/* Datos de Contacto Obligatorios */}
               <div className="space-y-4">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-100 dark:border-slate-800 pb-2">
                   1. Datos Personales de Contacto
                 </h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                       Nombre y Apellido *
                     </label>
                     <input
@@ -214,12 +208,12 @@ export default function Contacto() {
                       placeholder="Ej. Martín Pérez"
                       value={formData.nombre}
                       onChange={(e) => handleChange('nombre', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                       Correo Electrónico *
                     </label>
                     <input
@@ -228,13 +222,13 @@ export default function Contacto() {
                       placeholder="ejemplo@correo.com"
                       value={formData.email}
                       onChange={(e) => handleChange('email', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                     Teléfono / WhatsApp *
                   </label>
                   <input
@@ -243,27 +237,26 @@ export default function Contacto() {
                     placeholder="+54 9 11 1234-5678"
                     value={formData.telefono}
                     onChange={(e) => handleChange('telefono', e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                   />
                 </div>
               </div>
 
-              {/* CAMPOS ADICIONALES DE TASACIÓN (Condicionales) */}
               {isTasacion && (
                 <div className="space-y-4 pt-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-sky-600 border-b border-sky-100 pb-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 border-b border-sky-100 dark:border-sky-900/60 pb-2">
                     2. Detalles del Inmueble a Tasar
                   </h4>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                         Tipo de Inmueble
                       </label>
                       <select
                         value={formData.tipoInmueble}
                         onChange={(e) => handleChange('tipoInmueble', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium bg-white"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                       >
                         <option value="Departamento">Departamento</option>
                         <option value="Casa">Casa</option>
@@ -274,13 +267,13 @@ export default function Contacto() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                         Operación Deseada
                       </label>
                       <select
                         value={formData.tipoOperacion}
                         onChange={(e) => handleChange('tipoOperacion', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium bg-white"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                       >
                         <option value="Venta">Venta</option>
                         <option value="Alquiler">Alquiler</option>
@@ -290,7 +283,7 @@ export default function Contacto() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                         Ubicación / Barrio
                       </label>
                       <input
@@ -298,18 +291,18 @@ export default function Contacto() {
                         placeholder="Ej. Belgrano, Palermo, Olivos..."
                         value={formData.barrio}
                         onChange={(e) => handleChange('barrio', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                         Cantidad de Ambientes
                       </label>
                       <select
                         value={formData.ambientes}
                         onChange={(e) => handleChange('ambientes', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium bg-white"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                       >
                         <option value="1">1 Ambiente</option>
                         <option value="2">2 Ambientes</option>
@@ -322,9 +315,8 @@ export default function Contacto() {
                 </div>
               )}
 
-              {/* Comentarios finales */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                   {isTasacion ? 'Detalles o Estado del Inmueble' : 'Mensaje o Consulta'}
                 </label>
                 <textarea
@@ -336,11 +328,10 @@ export default function Contacto() {
                   }
                   value={formData.mensaje}
                   onChange={(e) => handleChange('mensaje', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm font-medium"
                 ></textarea>
               </div>
 
-              {/* Botón Submit */}
               <button
                 type="submit"
                 className="w-full inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-sky-600/20 transition-all text-sm"
@@ -355,7 +346,7 @@ export default function Contacto() {
       </div>
 
       {/* 3. BOTÓN FLOTANTE / ACCESO RÁPIDO A WHATSAPP */}
-      <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+      <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 border border-emerald-500/20">
         <div className="space-y-2 text-center sm:text-left">
           <span className="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             Contacto Inmediato

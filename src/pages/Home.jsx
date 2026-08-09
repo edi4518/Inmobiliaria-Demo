@@ -32,17 +32,12 @@ export default function Home() {
   // Real-time property filtering logic
   const filteredProperties = useMemo(() => {
     return propertiesData.filter((property) => {
-      // Operation filter ('Venta' | 'Alquiler')
       if (filters.operation !== 'Todos' && property.operation !== filters.operation) {
         return false;
       }
-
-      // Property type filter ('Departamento' | 'Casa' | 'PH' | 'Oficina')
       if (filters.type !== 'Todos' && property.type !== filters.type) {
         return false;
       }
-
-      // Location search filter
       if (
         filters.location.trim() !== '' &&
         !property.location.toLowerCase().includes(filters.location.toLowerCase()) &&
@@ -50,12 +45,9 @@ export default function Home() {
       ) {
         return false;
       }
-
-      // Max price filter
       if (filters.maxPrice !== '' && property.price > Number(filters.maxPrice)) {
         return false;
       }
-
       return true;
     });
   }, [filters]);
@@ -105,15 +97,15 @@ export default function Home() {
 
       {/* 2. SECCIÓN DESTACADOS (REAL-TIME FILTERED GRID) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200/60 pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200/60 dark:border-slate-800 pb-5">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-sky-600">Catálogo de Oportunidades</span>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">Catálogo de Oportunidades</span>
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
               Propiedades Destacadas
             </h2>
           </div>
-          <div className="text-sm font-medium text-slate-500">
-            Mostrando <span className="font-bold text-slate-900">{filteredProperties.length}</span> inmuebles disponibles
+          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+            Mostrando <span className="font-bold text-slate-900 dark:text-white">{filteredProperties.length}</span> inmuebles disponibles
           </div>
         </div>
 
@@ -125,12 +117,12 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-3xl border border-slate-100 p-12 text-center space-y-4 max-w-xl mx-auto shadow-sm">
-            <div className="w-16 h-16 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mx-auto">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-12 text-center space-y-4 max-w-xl mx-auto shadow-sm">
+            <div className="w-16 h-16 bg-amber-50 dark:bg-amber-950/40 text-amber-500 rounded-full flex items-center justify-center mx-auto">
               <Frown className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900">No encontramos coincidencias</h3>
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white">No encontramos coincidencias</h3>
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               No hay inmuebles que cumplan con todos los criterios de búsqueda seleccionados. Intentá modificar los filtros o restablecer la búsqueda.
             </p>
             <button
@@ -144,7 +136,7 @@ export default function Home() {
       </section>
 
       {/* 3. SECCIÓN POR QUÉ ELEGIRNOS */}
-      <section className="bg-slate-900 text-white py-20 px-4 sm:px-6 lg:px-8">
+      <section className="bg-slate-900 dark:bg-slate-950 text-white py-20 px-4 sm:px-6 lg:px-8 border-y border-slate-800 dark:border-slate-900">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-sky-400">Nuestros Pilares</span>
@@ -156,7 +148,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 */}
-            <div className="bg-slate-800/80 border border-slate-700/60 p-8 rounded-3xl space-y-4 hover:border-sky-500/50 transition-colors">
+            <div className="bg-slate-800/80 dark:bg-slate-900/80 border border-slate-700/60 dark:border-slate-800 p-8 rounded-3xl space-y-4 hover:border-sky-500/50 transition-colors">
               <div className="w-14 h-14 bg-sky-500/20 text-sky-400 rounded-2xl flex items-center justify-center">
                 <Users className="w-7 h-7" />
               </div>
@@ -167,7 +159,7 @@ export default function Home() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-slate-800/80 border border-slate-700/60 p-8 rounded-3xl space-y-4 hover:border-sky-500/50 transition-colors">
+            <div className="bg-slate-800/80 dark:bg-slate-900/80 border border-slate-700/60 dark:border-slate-800 p-8 rounded-3xl space-y-4 hover:border-sky-500/50 transition-colors">
               <div className="w-14 h-14 bg-teal-500/20 text-teal-400 rounded-2xl flex items-center justify-center">
                 <Calculator className="w-7 h-7" />
               </div>
@@ -178,7 +170,7 @@ export default function Home() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-slate-800/80 border border-slate-700/60 p-8 rounded-3xl space-y-4 hover:border-sky-500/50 transition-colors">
+            <div className="bg-slate-800/80 dark:bg-slate-900/80 border border-slate-700/60 dark:border-slate-800 p-8 rounded-3xl space-y-4 hover:border-sky-500/50 transition-colors">
               <div className="w-14 h-14 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center">
                 <ShieldCheck className="w-7 h-7" />
               </div>
@@ -193,7 +185,7 @@ export default function Home() {
 
       {/* 4. SECCIÓN CALL TO ACTION (CTA) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-gradient-to-r from-sky-600 via-sky-700 to-sky-800 rounded-3xl p-8 sm:p-12 text-white overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="relative bg-gradient-to-r from-sky-600 via-sky-700 to-sky-800 dark:from-sky-700 dark:via-sky-800 dark:to-slate-900 rounded-3xl p-8 sm:p-12 text-white overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 border border-sky-500/20">
           <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none translate-x-12 translate-y-12">
             <Building2 className="w-96 h-96" />
           </div>
@@ -213,7 +205,7 @@ export default function Home() {
           <div className="relative z-10 shrink-0">
             <Link
               to="/contacto"
-              className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-sky-900 font-extrabold text-base px-8 py-4 rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 bg-white text-sky-900 hover:bg-slate-100 font-extrabold text-base px-8 py-4 rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95"
             >
               <span>Solicitar Tasación</span>
               <ArrowRight className="w-5 h-5 text-sky-600" />

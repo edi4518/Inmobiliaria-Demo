@@ -1,6 +1,6 @@
 import { 
   Building2, ShieldCheck, TrendingUp, Users, Award, 
-  CheckCircle2, Clock, Phone, Mail, MessageCircle, HeartHandshake 
+  MessageCircle 
 } from 'lucide-react';
 
 export default function Nosotros() {
@@ -14,25 +14,25 @@ export default function Nosotros() {
   const values = [
     {
       icon: ShieldCheck,
-      color: 'bg-sky-500/10 text-sky-600',
+      color: 'bg-sky-500/10 text-sky-600 dark:text-sky-400',
       title: 'Seguridad Jurídica',
       description: 'Todas nuestras operaciones cuentan con revisión previa de títulos, estudio de dominios e inhibiciones por matriculados CUCICBA.'
     },
     {
       icon: TrendingUp,
-      color: 'bg-emerald-500/10 text-emerald-600',
+      color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
       title: 'Innovación Digital',
       description: 'Implementamos tours virtuales 360°, fotos de dron en alta resolución y valoración técnica algorítmica para optimizar tiempos.'
     },
     {
       icon: Users,
-      color: 'bg-indigo-500/10 text-indigo-600',
+      color: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
       title: 'Atención Personalizada',
       description: 'Asignamos un corredor especializado según el barrio y tipo de inmueble para brindarte seguimiento continuo y confidencial.'
     },
     {
       icon: Award,
-      color: 'bg-amber-500/10 text-amber-600',
+      color: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
       title: 'Compromiso e Integridad',
       description: 'Priorizamos la honestidad en cada tasación y la ética profesional en el trato con propietarios, compradores e inquilinos.'
     }
@@ -44,28 +44,24 @@ export default function Nosotros() {
       role: 'Socio Fundador & Corredor Inmobiliario',
       matricula: 'CUCICBA N° 6540',
       image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
-      phone: '+54 9 11 4567-8901'
     },
     {
       name: 'Dra. Mariana Benítez',
       role: 'Directora de Tasaciones & Asesoría Legal',
       matricula: 'CUCICBA N° 7842',
       image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
-      phone: '+54 9 11 4567-8902'
     },
     {
       name: 'Ing. Lucas Rossi',
       role: 'Líder de Desarrollo & Emprendimientos',
       matricula: 'CUCICBA N° 8129',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
-      phone: '+54 9 11 4567-8903'
     },
     {
       name: 'Lic. Sofía Martínez',
       role: 'Asesora Comercial - Residencial Norte',
       matricula: 'CUCICBA N° 9015',
       image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80',
-      phone: '+54 9 11 4567-8904'
     }
   ];
 
@@ -94,19 +90,19 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* 2. SECCIÓN MÉTRICAS / ESTADÍSTICAS */}
+      {/* 2. SECCIÓN MÉTRICAS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {stats.map((stat, idx) => (
             <div 
               key={idx}
-              className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all text-center space-y-2 group"
+              className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md dark:hover:shadow-sky-500/10 transition-all text-center space-y-2 group"
             >
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-sky-600 group-hover:scale-105 transition-transform block tracking-tight">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-sky-600 dark:text-sky-400 group-hover:scale-105 transition-transform block tracking-tight">
                 {stat.value}
               </span>
-              <h3 className="text-sm sm:text-base font-bold text-slate-900">{stat.label}</h3>
-              <p className="text-xs text-slate-500">{stat.subtext}</p>
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">{stat.label}</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{stat.subtext}</p>
             </div>
           ))}
         </div>
@@ -115,11 +111,11 @@ export default function Nosotros() {
       {/* 3. VALORES DE LA EMPRESA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-sky-600">Filosofía Institucional</span>
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <span className="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Filosofía Institucional</span>
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Nuestros Valores Fundamentales
           </h2>
-          <p className="text-slate-600 text-sm">
+          <p className="text-slate-600 dark:text-slate-400 text-sm">
             Los principios que guían cada negociación, tasación e intermediación comercial.
           </p>
         </div>
@@ -130,14 +126,14 @@ export default function Nosotros() {
             return (
               <div 
                 key={idx}
-                className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all space-y-4 flex flex-col justify-between"
+                className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg dark:hover:shadow-sky-500/10 transition-all space-y-4 flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   <div className={`w-14 h-14 rounded-2xl ${val.color} flex items-center justify-center`}>
                     <Icon className="w-7 h-7" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900">{val.title}</h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">{val.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
                     {val.description}
                   </p>
                 </div>
@@ -147,8 +143,8 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* 4. EQUIPO DE MARTILLEROS Y AGENTES */}
-      <section className="bg-slate-900 text-white py-20 px-4 sm:px-6 lg:px-8">
+      {/* 4. EQUIPO DE MARTILLEROS */}
+      <section className="bg-slate-900 dark:bg-slate-950 text-white py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800 dark:border-slate-900">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-sky-400">Equipo Profesional</span>
@@ -164,7 +160,7 @@ export default function Nosotros() {
             {teamMembers.map((member, idx) => (
               <div 
                 key={idx}
-                className="bg-slate-800/90 rounded-3xl border border-slate-700/80 overflow-hidden shadow-lg hover:border-sky-500/50 transition-all flex flex-col group"
+                className="bg-slate-800/90 dark:bg-slate-900/90 rounded-3xl border border-slate-700/80 dark:border-slate-800 overflow-hidden shadow-lg hover:border-sky-500/50 transition-all flex flex-col group"
               >
                 <div className="h-64 w-full overflow-hidden bg-slate-700 relative">
                   <img 
@@ -189,7 +185,7 @@ export default function Nosotros() {
                     href={`https://wa.me/5491112345678?text=Hola%20${encodeURIComponent(member.name)},%20quisiera%20hacerle%20una%20consulta.`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-sky-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors"
+                    className="inline-flex items-center justify-center gap-2 bg-slate-700 dark:bg-slate-800 hover:bg-sky-600 dark:hover:bg-sky-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors"
                   >
                     <MessageCircle className="w-4 h-4 fill-current" />
                     <span>Contactar Asesor</span>
